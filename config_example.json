@@ -1,0 +1,41 @@
+{
+  "log_path": "/root/pxy/hello.log",
+  "target_scheme": "http",
+  "target_host": "127.0.0.1:6666",
+  "ttl": 60,
+  "auth": {
+    "user":   "flush",
+    "password": "abc"
+  },
+  "resources": [
+    {
+      "name": "/todos/:id",
+      "past": true,
+      "resources": [
+        {
+          "name": "/stock/:id",
+          "ttl": 3600,
+          "target_host": "http://id.sample.com"
+        },
+        {
+          "name": "/stock/page",
+          "target_host": "http://127.0.0.1:6677"
+        }
+      ]
+    },{
+      "name": "/orders/:id",
+      "ttl": 10,
+      "target_scheme": "https",
+      "target_path": "/admin/v1/products/:id",
+      "past": true,
+      "resources": [
+        {
+          "name": "/payment",
+          "ttl": 10,
+          "target_path": "/admin/v1/abc"
+        }
+      ]
+    
+    }
+  ]
+}
